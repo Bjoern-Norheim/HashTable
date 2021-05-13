@@ -1,0 +1,18 @@
+*ptr_var
+&var
+strcut_ptr_var->
+
+
+// Declaration AND assignment
+int i = 1;
+while (true) {
+  // assignment
+  i = 999;
+}
+
+newNode = *(node*)malloc(sizeof(node) );
+
+malloc(sizeof(node) ) /// CREATE SPACE in the heap for a node object. RETURN pointer to that space
+(node*)malloc(sizeof(node) ) /// CAST that pointer to something more useful. A node pointer.
+*(node*)malloc(sizeof(node) ) /// DEREFERENCE the memory at this pointer
+newNode = *(node*)malloc(sizeof(node) ) /// COPY the data at that point of the heap INTO the stack
