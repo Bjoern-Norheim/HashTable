@@ -1,5 +1,6 @@
 HOMEWORK
-  1. Modify each of the existing methods to avoid copying for performance
+  1. Modify each of the existing methods to avoid copying for performance - getValue, setValue
 
-  2. Create an initializer for the hash table 
-    Create all the buckets and have the struct ready to write get/set on later
+  2. Implement basic get and set on hash table
+
+  3. Write good tests to challenge your hash table code thus far.

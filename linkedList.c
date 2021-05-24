@@ -2,33 +2,34 @@
 #include <stdio.h>
 #include "linkedList.h"
 
+#define KVPAIR_NULL ((kvPair){0, 0})
 
-linkedList initializeArray(int size){
+linkedList ll_initializeArray(int size){
   node newNode;
   node* previousNode = NULL;
   for(int i = 0; i< size - 1; i++){
     //  Malloc space inside of heap for new variable
     node* nodeLocation = (node*)malloc(sizeof(node) );
     // We set that space to the values for the new struct
-    *nodeLocation = (node){0,previousNode};
+    *nodeLocation = (node){KVPAIR_NULL,previousNode};
     
     previousNode = nodeLocation;
   }
   if(size != 0) {
     node* firstNode = (node *)malloc(sizeof(node));
-    *firstNode = (node){0, previousNode};
+    *firstNode = (node){KVPAIR_NULL, previousNode};
     linkedList lst = {firstNode};
     return lst;
   }
   return (linkedList){NULL};
 }
 
-int getSize(linkedList* lst){
+int ll_getSize(linkedList lst){
   // while() loops here
   struct node* currentNode;
   int i = 0;
   if(i == 0){
-    currentNode = lst->firstNode;
+    currentNode = lst.firstNode;
   }
   while(currentNode){
     i++;
@@ -39,7 +40,7 @@ int getSize(linkedList* lst){
   return i;
 }
 
-int getValue(linkedList* lst, int index){
+kvPair ll_getValue(linkedList* lst, int index){
   // while() loop used here not for
   struct node* currentNode; 
   struct node nodeContents;
@@ -52,10 +53,10 @@ int getValue(linkedList* lst, int index){
     nodeContents = *currentNode;
     currentNode = nodeContents.nextNode;
   }
-  printf("\n%d", nodeContents.data);
   return nodeContents.data;
 }
-void setValue(linkedList* lst, int data, int index){
+
+void ll_setValue(linkedList* lst, kvPair data, int index){
   struct node* currentNode; 
   struct node nodeContents;
   int i = 0;
@@ -68,11 +69,11 @@ void setValue(linkedList* lst, int data, int index){
     currentNode = nodeContents.nextNode;
   }
   nodeContents.data = data;
-  printf("\n%d", nodeContents.data);
 }
-void append(linkedList* lst) {
+
+void ll_append(linkedList* lst, kvPair data) {
   struct node* currentNode; 
-  
+
   if(lst->firstNode) {
     int i = 0;
     // -> === (*ptr).value
@@ -84,14 +85,14 @@ void append(linkedList* lst) {
       i++;
       currentNode = currentNode->nextNode;
     }
-   // GUARANTEE: currentNode is not null AND currentnode->nextNode IS null
-   node* newNodeLocation = malloc(sizeof(node));
-   *newNodeLocation = (node){0, NULL};
-   currentNode->nextNode = newNodeLocation;
+    // GUARANTEE: currentNode is not null AND currentnode->nextNode IS null
+    node* newNodeLocation = malloc(sizeof(node));
+    *newNodeLocation = (node){data, NULL};
+    currentNode->nextNode = newNodeLocation;
     // this function doesn't currently work
   } else {
     node* firstNode = (node *)malloc(sizeof(node));
-    *firstNode = (node){0, NULL};
+    *firstNode = (node){data, NULL};
     lst->firstNode = firstNode;
   }
 }
